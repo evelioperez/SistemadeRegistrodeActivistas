@@ -49,6 +49,13 @@ class Activista(models.Model):
         'proyecto_id',
         'Proyectos del Activista',
         help='Proyectos en los que ha trabajado')
+    proyectos_bachaco_ids = fields.Many2many(
+        'proyectosbachaco',
+        'proyectosbachaco_activistas_rel',
+        'activista_id',
+        'proyecto_id',
+        'Proyectos con Bachaco-ve',
+        help='Proyectos en los que ha trabajado')
     trab_estado_id = fields.Many2one('estado','Estado', help='Estado del lugar de trabajo')
     trab_municipio_id = fields.Many2one('municipio','Municipio')
     trab_parroquia_id = fields.Many2one('parroquia','Parroquia', help='Parroquia del lugar de trabajo')
@@ -87,3 +94,16 @@ class Proyectos(models.Model):
         'Activistas en el proyecto',
         help='Activistas que han trabajado en este Proyecto')
 
+class ProyectoBachaco(models.Model):
+    """Proyectos en los que participa con la comunidad Bachaco-ve"""
+    _name = 'proyectosbachaco'
+    _rec_name = 'proyecto'
+    proyecto = fields.Char(size=50,required=True, help='Nombre del Proyecto en el que participa')
+    activista_id = fields.Many2many(
+        'activista',
+        'proyectosbachaco_activistas_rel',
+        'proyecto_id',
+        'activista_id' ,
+        'Bachaqueros en el proyecto',
+        help='Bachaqueros que han trabajado en este Proyecto')
+        
