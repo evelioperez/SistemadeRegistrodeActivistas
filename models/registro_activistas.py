@@ -81,6 +81,11 @@ class Activista(models.Model):
         self.trab_parroquia_id = ''
 
 
+     _sql_constraints = [
+        ('cedula_unique', 'unique(cedula)', 'La Cedula debe ser única'),
+    ]
+
+
 class Proyectos(models.Model):
     """Proyectos en los que ha trabajado el Activista"""
     _name = 'proyectos'
